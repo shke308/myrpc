@@ -35,6 +35,17 @@ public class RpcContent implements Serializable {
      */
     Object response;
 
+    public RpcContent() {
+    }
+
+    public RpcContent(String name, String methodName, Class<?>[] parameterTypes, Object[] args, Object response) {
+        this.name = name;
+        this.methodName = methodName;
+        this.parameterTypes = parameterTypes;
+        this.args = args;
+        this.response = response;
+    }
+
     public String getName() {
         return name;
     }
