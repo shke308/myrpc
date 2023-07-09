@@ -36,12 +36,8 @@ public class Dispatcher {
         this.interfaceMap.put(key, value);
     }
 
-    public Object get(String key) throws InterfaceNotRegisterException {
-        Object interfaces = interfaceMap.get(key);
-        if (interfaces == null) {
-            throw new InterfaceNotRegisterException(key + " is not registered!");
-        }
-        return interfaces;
+    public Object get(String key) {
+        return interfaceMap.get(key);
     }
 
     public void remove(String key) {

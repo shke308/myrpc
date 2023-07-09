@@ -24,14 +24,20 @@ import java.lang.reflect.Method;
  */
 public class ServerHttpRequestHandler extends ChannelInboundHandlerAdapter {
 
+    private String ioThread;
+
+    public ServerHttpRequestHandler(String ioThread) {
+        this.ioThread = ioThread;
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         FullHttpRequest req = (FullHttpRequest) msg;
-        System.out.println(req.toString());
 
         ByteBuf buf = req.content();
         byte[] data = new byte[buf.readableBytes()];
-
+        buf.readBytes(data);
+        System.out.println("io thread: " + ioThread + " exec thread: " + Thread.currentThread().getName());
         try (ByteArrayInputStream bis = new ByteArrayInputStream(data);
              ObjectInputStream obs = new ObjectInputStream(bis)) {
             RpcContent content = (RpcContent) obs.readObject();

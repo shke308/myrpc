@@ -11,6 +11,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 
@@ -23,7 +24,7 @@ public class RpcService {
 
     private static volatile RpcService INSTANCE;
 
-    private Dispatcher dispatcher;
+    private final Dispatcher dispatcher;
 
     private RpcService () {
         this.dispatcher = Dispatcher.getInstance();
@@ -51,14 +52,14 @@ public class RpcService {
         ServerBootstrap server = new ServerBootstrap();
         ChannelFuture bind = server.group(group, work)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new ChannelInitializer<NioServerSocketChannel>() {
+                .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
-                    protected void initChannel(NioServerSocketChannel ch) throws Exception {
+                    protected void initChannel(NioSocketChannel ch) throws Exception {
                         System.out.println("server accept client port: " + ch.remoteAddress().getPort());
                         ChannelPipeline pipeline = ch.pipeline();
                         pipeline.addLast(new HttpServerCodec())
                                 .addLast(new HttpObjectAggregator(1024 * 512))
-                                .addLast(new ServerHttpRequestHandler());
+                                .addLast(new ServerHttpRequestHandler(Thread.currentThread().getName()));
 
                     }
                 })
