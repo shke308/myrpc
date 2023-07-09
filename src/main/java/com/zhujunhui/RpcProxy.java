@@ -38,7 +38,7 @@ public enum RpcProxy {
                         .methodName(methodName)
                         .parameterTypes(parameterTypes)
                         .args(args).build();
-                CompletableFuture<Object> resF = ClientFactory.transport(rpcContent);
+                CompletableFuture<Object> resF = ClientFactory.getInstance().transport(rpcContent);
                 res = resF.get();
             } else {
                 // 本地连接

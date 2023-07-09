@@ -20,7 +20,7 @@ public class PropertyMgr {
         }
     }
 
-    private static String getString(String key) {
+    public static String getString(String key) {
         if (properties == null) {
             return null;
         }
