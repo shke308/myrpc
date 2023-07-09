@@ -13,6 +13,8 @@ public class SerDerUtil {
 
     static ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
+    private SerDerUtil () {}
+
     public synchronized static byte[] ser(Object msg) {
         bos.reset();
         try {

@@ -6,6 +6,7 @@ import com.zhujunhui.exception.InterfaceNotRegisterException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 接口映射器
  * @author zhujunhui
  * @date 2023/7/9
  */

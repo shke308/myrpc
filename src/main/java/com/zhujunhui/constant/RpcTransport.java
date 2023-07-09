@@ -3,6 +3,7 @@ package com.zhujunhui.constant;
 import com.zhujunhui.exception.TransportNotExistException;
 
 /**
+ * 协议类
  * @author zhujunhui
  * @date 2023/7/9
  */

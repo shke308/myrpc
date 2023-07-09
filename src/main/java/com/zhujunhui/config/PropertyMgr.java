@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
+ * 配置管理类
  * @author zhujunhui
  * @date 2023/7/9
  */

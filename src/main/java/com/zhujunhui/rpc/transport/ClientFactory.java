@@ -18,11 +18,12 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * 连接工厂
  * @author zhujunhui
  * @date 2023/7/9
  */
 public class ClientFactory {
-    private static ClientFactory INSTANCE;
+    private static volatile ClientFactory INSTANCE;
 
     private ClientFactory() {
     }

@@ -9,6 +9,7 @@ import java.lang.reflect.Proxy;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * 客户端代理类
  * @author zhujunhui
  * @date 2023/7/9
  */
