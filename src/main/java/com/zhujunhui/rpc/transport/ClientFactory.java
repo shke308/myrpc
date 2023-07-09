@@ -1,9 +1,7 @@
 package com.zhujunhui.rpc.transport;
 
 import com.zhujunhui.config.PropertyMgr;
-import com.zhujunhui.constant.BalanceStrategy;
 import com.zhujunhui.constant.RpcTransport;
-import com.zhujunhui.exception.BalanceStrategyNotExistException;
 import com.zhujunhui.exception.TransportNotExistException;
 import com.zhujunhui.rpc.protocol.RpcContent;
 import io.netty.handler.codec.http.HttpMethod;
@@ -17,7 +15,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -27,22 +24,10 @@ import java.util.concurrent.CompletableFuture;
 public class ClientFactory {
     private static ClientFactory INSTANCE;
 
-    Random random;
-
-    /**
-     * 连接池负载策略
-     */
-    BalanceStrategy strategy;
-
-    private ClientFactory() throws BalanceStrategyNotExistException {
-        int strategyNum = PropertyMgr.getInt("worker.balance.strategy");
-        strategy = BalanceStrategy.getStrategy(strategyNum);
-        if (strategy == BalanceStrategy.RANDOM) {
-            random = new Random();
-        }
+    private ClientFactory() {
     }
 
-    public static ClientFactory getInstance() throws BalanceStrategyNotExistException {
+    public static ClientFactory getInstance() {
         if (INSTANCE == null) {
             synchronized (ClientFactory.class) {
                 if (INSTANCE == null) {
