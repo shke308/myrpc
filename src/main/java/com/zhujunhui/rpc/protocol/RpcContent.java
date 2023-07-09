@@ -13,76 +13,84 @@ public class RpcContent implements Serializable {
     /**
      * 请求接口名称
      */
-    String name;
+    private String interfaceName;
 
     /**
      * 请求方法名称
      */
-    String methodName;
+    private String methodName;
 
     /**
      * 请求参数类型
      */
-    Class<?>[] parameterTypes;
+    private Class<?>[] parameterTypes;
 
     /**
      * 方法参数
      */
-    Object[] args;
+    private Object[] args;
 
     /**
      * 返回的数据
      */
-    Object response;
+    private Object response;
 
-    public RpcContent() {
+    private RpcContent() {
     }
-
-    public RpcContent(String name, String methodName, Class<?>[] parameterTypes, Object[] args, Object response) {
-        this.name = name;
-        this.methodName = methodName;
-        this.parameterTypes = parameterTypes;
-        this.args = args;
-        this.response = response;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getInterfaceName() {
+        return interfaceName;
     }
 
     public String getMethodName() {
         return methodName;
     }
 
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
     public Class<?>[] getParameterTypes() {
         return parameterTypes;
-    }
-
-    public void setParameterTypes(Class<?>[] parameterTypes) {
-        this.parameterTypes = parameterTypes;
     }
 
     public Object[] getArgs() {
         return args;
     }
 
-    public void setArgs(Object[] args) {
-        this.args = args;
-    }
-
     public Object getResponse() {
         return response;
     }
 
-    public void setResponse(Object response) {
-        this.response = response;
+    public static class RpcContentBuilder {
+        private RpcContent rpcContent;
+
+        public RpcContentBuilder() {
+            rpcContent = new RpcContent();
+        }
+
+        public RpcContentBuilder interfaceName (String interfaceName) {
+            this.rpcContent.interfaceName = interfaceName;
+            return this;
+        }
+
+        public RpcContentBuilder methodName (String methodName) {
+            this.rpcContent.methodName = methodName;
+            return this;
+        }
+
+        public RpcContentBuilder parameterTypes (Class<?>[] parameterTypes) {
+            this.rpcContent.parameterTypes = parameterTypes;
+            return this;
+        }
+
+        public RpcContentBuilder args (Object[] args) {
+            this.rpcContent.args = args;
+            return this;
+        }
+
+        public RpcContentBuilder response (Object response) {
+            this.rpcContent.response = response;
+            return this;
+        }
+
+        public RpcContent build() {
+            return this.rpcContent;
+        }
     }
 }
