@@ -21,6 +21,8 @@ public class PropertyMgr {
         }
     }
 
+    private PropertyMgr() {}
+
     public static String getString(String key) {
         if (properties == null) {
             return null;
